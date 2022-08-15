@@ -1,8 +1,8 @@
 import { useState } from 'preact/hooks';
 import type { ComponentChildren } from 'preact';
-import './Counter.module.scss';
 import { useStore } from '@nanostores/preact';
 import { switchTheme, Theme, themeState } from '@/themeStore';
+import styles from './Counter.module.scss';
 
 export default function Counter({ children }: { children?: ComponentChildren }) {
 	const theme = useStore(themeState);
@@ -12,18 +12,21 @@ export default function Counter({ children }: { children?: ComponentChildren }) 
 
 	return (
 		<>
-			<select onChange={(e) => {
-				switchTheme(e.currentTarget.value as Theme);
-			}}>
+			<select
+				value={theme}
+				onChange={(e) => {
+					switchTheme(e.currentTarget.value as Theme);
+				}}
+			>
 				<option>dark</option>
 				<option>light</option>
 			</select>
-			<div className='counter'>
+			<div className={styles.counter}>
 				<button onClick={subtract}>-</button>
 				<pre>{count}</pre>
 				<button onClick={add}>+</button>
 			</div>
-			<div className='counter-message'>{children}</div>
+			<div className={styles['counter-message']}>{children}</div>
 		</>
 	);
 }

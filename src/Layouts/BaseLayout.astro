@@ -8,14 +8,17 @@
 		<title>Milky Web</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script>
+			// this exists to stop theme from flashing by setting it before css is evaluated
 			import type { Theme } from '@/themeStore';
-			let theme: Theme;
-			const stored = window.localStorage.getItem('colorScheme') as Theme | null;
+			(() => {
+				let theme: Theme;
+				const stored = window.localStorage.getItem('colorScheme') as Theme | null;
 
-			if (stored) theme = stored;
-			else theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+				if (stored) theme = stored;
+				else theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 
-			document.querySelector('html')!.dataset.theme = theme;
+				document.querySelector('html')!.dataset.theme = theme;
+			})()
 		</script>
 		<style lang="scss">
 			html[data-theme = 'light'] {
@@ -42,7 +45,7 @@
 				color: var(--text-color);
 			}
 
-			.main {
+			body {
 				width: 100%;
 				height: 100%;
 				display: flex;
