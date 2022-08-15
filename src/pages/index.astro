@@ -1,0 +1,15 @@
+---
+// Component Imports
+import BaseLayout from 'src/Layouts/BaseLayout.astro';
+import Counter from '../components/Counter';
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+---
+
+<BaseLayout>
+	<Counter client:load>
+		<h1>Hello, Preact!</h1>
+	</Counter>
+</BaseLayout>
+
