@@ -1,9 +1,41 @@
+@use './utils';
+
 html[data-theme='light'] {
-	--bg-color: #ffffff;
-	--text-color: #000000;
+	--bg-color-from: #feffe3;
+	--bg-color-to: #fdfff5;
+	--text-color: #270158;
+
+	// change hex to rgb so can add alpha channel with rgba()
+  	--primary-100: #{utils.hexToRGB(#FBFDFF)};
+	--primary-200: #{utils.hexToRGB(#CDE8FF)};
+	--primary-300: #{utils.hexToRGB(#A3D6FF)};
+	--primary-400: #{utils.hexToRGB(#7DC5FF)};
+	--primary-500: #{utils.hexToRGB(#5AB5FF)};
+	--primary-600: #{utils.hexToRGB(#3BA7FF)};
+	--primary-700: #{utils.hexToRGB(#1C99FF)};
+	--primary-800: #{utils.hexToRGB(#008CFE)};
+	--primary-900: #{utils.hexToRGB(#007EE5)};
+	--primary-1000: #{utils.hexToRGB(#0072CE)};
+	--primary-1100: #{utils.hexToRGB(#0066B9)};
+	--primary-1200: #{utils.hexToRGB(#005CA7)};
 }
 
 html[data-theme='dark'] {
-	--bg-color: #000000;
-	--text-color: #ffffff;
+	--bg-color-from: #270158;
+	--bg-color-to: #190f29;
+	--text-color: #fdfff5;
+
+	// change hex to rgb so can add alpha channel with rgba()
+  	--primary-100: #{utils.hexToRGB(#D6DCFF)};
+	--primary-200: #{utils.hexToRGB(#ABB9FF)};
+	--primary-300: #{utils.hexToRGB(#8498FF)};
+	--primary-400: #{utils.hexToRGB(#617BFF)};
+	--primary-500: #{utils.hexToRGB(#4160FF)};
+	--primary-600: #{utils.hexToRGB(#2448FF)};
+	--primary-700: #{utils.hexToRGB(#0730FF)};
+	--primary-800: #{utils.hexToRGB(#0027EC)};
+	--primary-900: #{utils.hexToRGB(#0023D4)};
+	--primary-1000: #{utils.hexToRGB(#001FBF)};
+	--primary-1100: #{utils.hexToRGB(#001CAC)};
+	--primary-1200: #{utils.hexToRGB(#00199B)};
 }

@@ -1,15 +1,6 @@
 ---
-// Component Imports
-import BaseLayout from 'src/Layouts/BaseLayout.astro';
-import Counter from '../components/Counter';
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
-
-<BaseLayout>
-	<Counter client:load>
-		<h1>Hello, Preact!</h1>
-	</Counter>
+<BaseLayout description='Milky Web brings a galaxy of web infrastructure into your hands.'>
+	<div style={{ height: '10000px' }}></div>
 </BaseLayout>
-
