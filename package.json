@@ -29,6 +29,7 @@
 	},
 	"dependencies": {
 		"@nanostores/preact": "0.2.1",
+		"flamethrower-router": "0.0.0-meme.4",
 		"nanostores": "0.6.0",
 		"preact": "10.10.2"
 	}

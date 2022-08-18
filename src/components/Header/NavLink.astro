@@ -5,7 +5,7 @@ export interface Props {
 }
 
 const { href, label } = Astro.props as Props;
-const isActive = Astro.url.pathname === href;
+const isActive = Astro.url.pathname === href || Astro.url.pathname.slice(undefined, -1) === href;
 ---
 <style lang="scss">
 	@use "../../styles/vars.scss";
@@ -30,4 +30,4 @@ const isActive = Astro.url.pathname === href;
 		}
 	}
 </style>
-<a data-active={isActive} href={href} class="root" rel="prefetch">{label}</a>
+<a data-active={isActive} href={href} class="root">{label}</a>
