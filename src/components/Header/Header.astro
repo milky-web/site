@@ -81,6 +81,7 @@ import NavLink from "./NavLink.astro";
 </header>
 <script>
 	(() => {
+		const html = document.querySelector('html')!;
 		const nav = document.getElementById('nav') as HTMLElement;
 		const toggle = document.getElementById('nav-toggle') as HTMLButtonElement;
 
@@ -92,6 +93,18 @@ import NavLink from "./NavLink.astro";
 					nav.dataset.opened = 'true';
 				}
 			});
+
+			// listen for theme change and redraw with new theme
+			const observer = new MutationObserver((list) => {
+				for (const mutation of list) {
+					if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+						toggle.children[0].setAttribute('fill', html.dataset.theme === 'dark' ? 'white' : 'black');
+						console.log(toggle.children[0]);
+					}
+				}
+			});
+			observer.observe(html, { childList: false, attributes: true, subtree: false });
+			toggle.children[0].setAttribute('fill', html.dataset.theme === 'dark' ? 'white' : 'black');
 		};
 
 		// close menu if a click ocurred outside of it
