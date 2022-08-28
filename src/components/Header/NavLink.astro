@@ -11,7 +11,7 @@ const isActive = Astro.url.pathname === href || Astro.url.pathname.slice(undefin
 	@use "../../styles/vars.scss";
 
 	.root {
-		padding: 8px 16px;
+		padding: vars.$spacing_md vars.$spacing_xl;
 		font-weight: 500;
 		color: var(--text-color);
 		text-decoration: none;

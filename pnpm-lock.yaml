@@ -15,7 +15,7 @@ specifiers:
   eslint-plugin-astro: 0.17.1
   eslint-plugin-jsx-a11y: 6.6.1
   eslint-plugin-prettier: 4.2.1
-  flamethrower-router: 0.0.0-meme.4
+  flamethrower-router: 0.0.0-meme.9
   nanostores: 0.6.0
   postcss-preset-env: 7.7.2
   preact: 10.10.2
@@ -24,7 +24,7 @@ specifiers:
 
 dependencies:
   '@nanostores/preact': 0.2.1_z6w7v2u65nzsz7eelxrdhgz7vu
-  flamethrower-router: 0.0.0-meme.4
+  flamethrower-router: 0.0.0-meme.9
   nanostores: 0.6.0
   preact: 10.10.2
 
@@ -2286,8 +2286,8 @@ packages:
       pkg-dir: 4.2.0
     dev: true
 
-  /flamethrower-router/0.0.0-meme.4:
-    resolution: {integrity: sha512-oXFxdhSVOmcXxck6mM1qSph93kcr1hu4mU4HjTmqlV6aboAKfDi1x+i7SaokBI6rQ2pnODnnbrZcc7PJf6ICmA==}
+  /flamethrower-router/0.0.0-meme.9:
+    resolution: {integrity: sha512-hYOWXR5oEcffq1Py90WVUIadTqtmvyVKcnc85uMBe+0Zw7Q+Mm6hc2ZW4XPWRsqKhyj8HwpRG1O5meKfXHPccg==}
     dev: false
 
   /flat-cache/3.0.4:

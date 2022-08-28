@@ -26,6 +26,7 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'off',
 		'no-constant-condition': 'off',
 		'@typescript-eslint/ban-types': 'off',
+		'@typescript-eslint/no-non-null-assertion': 'off',
 		quotes: 'off',
 		'@typescript-eslint/quotes': [
 			0,

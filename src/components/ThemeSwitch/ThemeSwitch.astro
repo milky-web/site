@@ -1,0 +1,30 @@
+<style lang="scss">
+	@use "../../styles/vars.scss";
+
+	#theme-switch {
+		border-radius: vars.$radius;
+		padding: vars.$spacing_sm vars.$spacing_md;
+		font-size: 16px;
+		color: var(--text-color);
+		background-color: transparent;
+		border: 2px solid rgb(var(--primary-300));
+
+		& > option {
+			color: var(--text-color);
+			background-color: var(--bg-color-to);
+		}
+	}
+</style>
+<select id="theme-switch">
+	<option value="dark">Dark Theme</option>
+	<option value="light">Light Theme</option>
+</select>
+<script is:inline>
+	function onThemeChange(e) {
+		document.querySelector('html').dataset.theme = e.target.value;
+		localStorage.setItem('theme', e.target.value);
+		console.log('newtheme,', e.target.value);
+	};
+	document.getElementById('theme-switch').value = document.querySelector('html').dataset.theme;
+	document.getElementById('theme-switch').onchange = onThemeChange;
+</script>

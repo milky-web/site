@@ -23,11 +23,11 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script is:inline>
 			// this exists to stop theme from flashing by setting it before css is evaluated
-			(function(){var t;var s=localStorage.getItem('colorScheme');if(s)t=s;else t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.querySelector('html').dataset.theme=t;})()
+			(function(){var t;var s=localStorage.getItem('theme');if(s)t=s;else t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.querySelector('html').dataset.theme=t;})()
 		</script>
 		<script>
 			import flamethrower from 'flamethrower-router';
-			window.router = flamethrower({ pageTransitions: false, log: true, prefetch: true });
+			window.router = flamethrower({ pageTransitions: false, log: true, prefetch: 'visible' });
 		</script>
 		<style lang="scss">
 			.main {
