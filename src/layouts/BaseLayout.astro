@@ -27,7 +27,7 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 		</script>
 		<script>
 			import flamethrower from 'flamethrower-router';
-			window.router = flamethrower({ pageTransitions: false, log: true, prefetch: 'visible' });
+			window.router = flamethrower({ pageTransitions: false, log: import.meta.env.DEV, prefetch: 'visible' });
 		</script>
 		<style lang="scss">
 			.main {
