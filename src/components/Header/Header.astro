@@ -4,7 +4,7 @@ import NavLink from "./NavLink.astro";
 
 ---
 <style lang="scss">
-	$breakpoint: 1;
+	$breakpoint: 600px;
 
 	.root {
 		display: flex;
@@ -27,12 +27,92 @@ import NavLink from "./NavLink.astro";
 		justify-content: center;
 		gap: 1rem;
 	}
+
+	.toggle-wrapper {
+		display: none;
+	}
+
+	.nav-toggle {
+		display: none;
+	}
+
+	@media only screen and (max-width: $breakpoint) {
+		.nav {
+			display: none;
+			flex-direction: column;
+			position: fixed;
+			top: 60px;
+			left: 0;
+			right: 0;
+			gap: 0;
+		}
+
+		.nav[data-opened] {
+			display: flex;
+		}
+
+		.toggle-wrapper {
+			display: flex;
+			flex-grow: 1;
+			justify-content: center;
+		}
+
+		.nav-toggle {
+			display: block;
+			border: 0;
+			background-color: transparent;
+			cursor: pointer;
+		}
+	}
+
 </style>
 <header class="root">
 	<div>Milky Web</div>
-	<nav class="nav">
+	<div class="toggle-wrapper">
+		<button id="nav-toggle" class="nav-toggle" aria-label="Toggle Navigation">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>
+		</button>
+	</div>
+	<nav id="nav" class="nav">
 		<NavLink href="/" label="Home" />
 		<NavLink href="/pricing" label="Pricing" />
 	</nav>
 	<ThemeSwitch />
 </header>
+<script>
+	(() => {
+		const nav = document.getElementById('nav') as HTMLElement;
+		const toggle = document.getElementById('nav-toggle') as HTMLButtonElement;
+
+		const setupMenu = (nav: HTMLElement, toggle: HTMLButtonElement) => {
+			toggle.addEventListener('click', (e) => {
+				if (nav.dataset.opened) {
+					delete nav.dataset.opened;
+				} else {
+					nav.dataset.opened = 'true';
+				}
+			});
+		};
+
+		// close menu if a click ocurred outside of it
+		window.addEventListener('click', (e) => {
+			const nav = document.getElementById('nav') as HTMLElement;
+			const toggle = document.getElementById('nav-toggle') as HTMLButtonElement;
+			const opened = nav.dataset.opened;
+
+			// @ts-expect-error
+			if (opened && !toggle.contains(e.target) && !nav.contains(e.target)) {
+				delete nav.dataset.opened;
+			}
+		});
+
+		// need to re-setup on navigation because elements are replaced
+		window.addEventListener('flamethrower:router:end', () => {
+			const nav = document.getElementById('nav') as HTMLElement;
+			const toggle = document.getElementById('nav-toggle') as HTMLButtonElement;
+			setupMenu(nav, toggle);
+		});
+
+		setupMenu(nav, toggle);
+	})()
+</script>
