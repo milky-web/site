@@ -99,7 +99,6 @@ import NavLink from "./NavLink.astro";
 				for (const mutation of list) {
 					if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
 						toggle.children[0].setAttribute('fill', html.dataset.theme === 'dark' ? 'white' : 'black');
-						console.log(toggle.children[0]);
 					}
 				}
 			});
