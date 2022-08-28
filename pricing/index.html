@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="dark" lang="en" class="astro-YTVYQJVF">
+<html data-theme="dark" lang="en" class="astro-FDQRFA4U">
 	<head>
 		<meta charset="utf-8">
 		<meta name="generator" content="Astro v1.1.1">
@@ -11,10 +11,16 @@
 			// this exists to stop theme from flashing by setting it before css is evaluated
 			(function(){var t;var s=localStorage.getItem('theme');if(s)t=s;else t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.querySelector('html').dataset.theme=t;})()
 		</script>
+		<script>
+			// star data stays here so it stays between page nav
+			var starData=[];
+		</script>
 		
 		
-	<link rel="stylesheet" href="/assets/index-pricing.3103575d.css" /><script type="module" src="/hoisted.cc8a51f0.js"></script></head>
-	<body class="astro-YTVYQJVF">
+	<link rel="stylesheet" href="/assets/index-pricing.f469bd7a.css" /><script type="module" src="/hoisted.3cc4652f.js"></script></head>
+	<body class="astro-FDQRFA4U">
+		
+<canvas id="stars" class="astro-2HVUQEDQ"></canvas>
 		
 <header class="root astro-U45UC73Y">
 	<div class="astro-U45UC73Y">Milky Web</div>
@@ -25,21 +31,20 @@
 <a data-active href="/pricing" class="root astro-P4PXTJHK">Pricing</a>
 	</nav>
 	
-<select id="theme-switch" class="astro-UMGFJBQI">
-	<option value="dark" class="astro-UMGFJBQI">Dark Theme</option>
-	<option value="light" class="astro-UMGFJBQI">Light Theme</option>
+<select id="theme-switch" class="astro-OLRKLODG">
+	<option value="dark" class="astro-OLRKLODG">Dark Theme</option>
+	<option value="light" class="astro-OLRKLODG">Light Theme</option>
 </select>
 <script>
 	function onThemeChange(e) {
 		document.querySelector('html').dataset.theme = e.target.value;
 		localStorage.setItem('theme', e.target.value);
-		console.log('newtheme,', e.target.value);
 	};
 	document.getElementById('theme-switch').value = document.querySelector('html').dataset.theme;
 	document.getElementById('theme-switch').onchange = onThemeChange;
 </script>
 </header>
-		<main class="main astro-YTVYQJVF">
+		<main class="main astro-FDQRFA4U">
 			
 		</main>
 		<footer></footer>
