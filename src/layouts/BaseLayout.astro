@@ -26,10 +26,6 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 			// this exists to stop theme from flashing by setting it before css is evaluated
 			(function(){var t;var s=localStorage.getItem('theme');if(s)t=s;else t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.querySelector('html').dataset.theme=t;})()
 		</script>
-		<script is:inline>
-			// star data stays here so it stays between page nav
-			var starData=[];
-		</script>
 		<script>
 			import flamethrower from 'flamethrower-router';
 			window.router = flamethrower({ pageTransitions: false, log: import.meta.env.DEV, prefetch: 'visible' });
