@@ -23,7 +23,6 @@
 	function onThemeChange(e) {
 		document.querySelector('html').dataset.theme = e.target.value;
 		localStorage.setItem('theme', e.target.value);
-		console.log('newtheme,', e.target.value);
 	};
 	document.getElementById('theme-switch').value = document.querySelector('html').dataset.theme;
 	document.getElementById('theme-switch').onchange = onThemeChange;
