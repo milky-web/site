@@ -24,7 +24,7 @@ jobs:
 
       - name: Build
         run: |
-          pnpm i --legacy-peer-deps
+          pnpm i --frozen-lockfile
           pnpm build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
