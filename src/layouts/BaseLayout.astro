@@ -27,6 +27,22 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 			(function(){var t;var s=localStorage.getItem('theme');if(s)t=s;else t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.querySelector('html').dataset.theme=t;})()
 		</script>
 		<script>
+			// setup mutation observer to fire event whenever theme changes
+		
+			const observer = new MutationObserver((list) => {
+				for (const mutation of list) {
+					if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+						window.dispatchEvent(new CustomEvent('themeChange', {
+							detail: {
+								newTheme: (mutation.target as HTMLHtmlElement).dataset.theme
+							}
+						}));
+					}
+				}
+			});
+			observer.observe(document.querySelector('html')!, { childList: false, attributes: true, subtree: false });
+		</script>
+		<script>
 			import flamethrower from 'flamethrower-router';
 			window.router = flamethrower({ pageTransitions: false, log: import.meta.env.DEV, prefetch: 'visible' });
 		</script>

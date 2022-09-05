@@ -1,23 +1,24 @@
 <style lang="scss">
 	#stars {
-		position: fixed;
+		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 100%;
 		z-index: -998;
-		display: block;
 	}
 </style>
 <canvas id="stars" />
 <script>
-	(() => {
+	;(() => {
 		const canvas = document.getElementById('stars') as HTMLCanvasElement;
 
 		type Star = {
 			x: number;
 			y: number;
 			size: number;
+			// degrees to rotate
+			rotation: number;
 			pointiness?: number;
 			color?: string;
 		};
@@ -29,43 +30,32 @@
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 
-		const generateStars = (canvas: HTMLCanvasElement) => {
-			const theme = document.querySelector('html')!.dataset.theme || 'dark';
-			const rect = canvas.getBoundingClientRect();
-			// num stars scales to user screen size
-			const numStars = (window.innerHeight * window.innerWidth) / 19000;
-
-			for (let i = 0; i < numStars; i += 1) {
-				stars[i] = {
-					size: randomInt(1, 3),
-					// keep a padding of 16
-					x: randomInt(16, rect.width - 16),
-					// try not to create any behind header
-					y: randomInt(64, rect.height - 16),
-					pointiness: randomInt(1, 2),
-				}
-			}
-		};
-
 		// will run on every page navigation
-		const setupCanvas = (canvas: HTMLCanvasElement) => {
+		const setupCanvas = (canvas: HTMLCanvasElement, genStars?: boolean) => {
 			const ctx = canvas.getContext('2d')!;
 			const html = document.querySelector('html')!;
+			const main = document.querySelector('main')!;
 			const htmlStyle = getComputedStyle(html);
 
 			// Set the "actual" size of the canvas, prevents blurriness on large screens
 			const rect = canvas.getBoundingClientRect();
+			const mainHeight = main.getBoundingClientRect().height;
 			canvas.width = rect.width;
-			canvas.height = rect.height;
+			canvas.style.height = mainHeight + 'px';
+			canvas.height = mainHeight;
 
 			const updateFill = () => {
 				const isDark = html.dataset.theme === 'dark';
 				ctx.fillStyle = `rgb(${htmlStyle.getPropertyValue(isDark ? '--primary-200' : '--primary-600')})`;
 			};
 
-			const drawStar = ({ x, y, color, pointiness = 3, size }: Star) => {
+			const drawStar = ({ x, y, color, rotation, pointiness = 3, size }: Star) => {
 				if (color) ctx.fillStyle = color;
 				const pointDistance = size * pointiness;
+
+				ctx.translate(x, y);
+				ctx.rotate(rotation * Math.PI / 180);
+				ctx.translate(-x, -y);
 				ctx.beginPath();
 				ctx.moveTo(x, y - pointDistance);
 				ctx.lineTo(x + size / 2, y - size / 2);
@@ -76,10 +66,11 @@
 				ctx.lineTo(x - pointDistance, y - size / 4);
 				ctx.lineTo(x - size / 2, y - size / 2);
 				ctx.closePath();
+				ctx.setTransform();
 				ctx.fill();
 
 				// set back to default
-				updateFill();
+				if (color) updateFill();
 			};
 
 			const draw = () => {
@@ -88,19 +79,26 @@
 				}
 			};
 
-			// listen for theme change and redraw with new theme
-			const observer = new MutationObserver((list) => {
-				for (const mutation of list) {
-					if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-						updateFill();
-						draw();
+			const generateStars = () => {
+				const rect = canvas.getBoundingClientRect();
+				// num stars scales to user screen size
+				const numStars = (mainHeight * window.innerWidth) / 25000;
+
+				for (let i = 0; i < numStars; i += 1) {
+					stars[i] = {
+						size: randomInt(1, 3),
+						// keep a padding of 16
+						x: randomInt(16, rect.width - 16),
+						// try not to create any behind header
+						y: randomInt(64, rect.height - 16),
+						rotation: randomInt(0, 90),
+						pointiness: randomInt(1, 2),
 					}
 				}
-			});
-			observer.observe(html, { childList: false, attributes: true, subtree: false });
+			};
 
 			// only gen if the first render
-			if (stars.length === 0) generateStars(canvas);
+			if (genStars || stars.length === 0) generateStars();
 			updateFill();
 			draw();
 		};
@@ -113,9 +111,13 @@
 
 		window.addEventListener('resize', () => {
 			const canvas = document.getElementById('stars') as HTMLCanvasElement;
-			generateStars(canvas);
-			setupCanvas(canvas);
+			setupCanvas(canvas, true);
 		});
+
+		window.addEventListener('themeChange', () => {
+			const canvas = document.getElementById('stars') as HTMLCanvasElement;
+			setupCanvas(canvas);
+		})
 
 		setupCanvas(canvas);
 	})()
