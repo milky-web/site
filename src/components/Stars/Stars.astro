@@ -23,7 +23,7 @@
 			color?: string;
 		};
 
-		const stars: Star[] = [];
+		let stars: Star[] = [];
 			
 		// inclusive range
 		function randomInt(min: number, max: number) {
@@ -31,7 +31,7 @@
 		}
 
 		// will run on every page navigation
-		const setupCanvas = (canvas: HTMLCanvasElement, genStars?: boolean) => {
+		const setupCanvas = (canvas: HTMLCanvasElement, noGenStars?: boolean) => {
 			const ctx = canvas.getContext('2d')!;
 			const html = document.querySelector('html')!;
 			const main = document.querySelector('main')!;
@@ -39,10 +39,10 @@
 
 			// Set the "actual" size of the canvas, prevents blurriness on large screens
 			const rect = canvas.getBoundingClientRect();
-			const mainHeight = main.getBoundingClientRect().height;
+			const mainRect = main.getBoundingClientRect();
 			canvas.width = rect.width;
-			canvas.style.height = mainHeight + 'px';
-			canvas.height = mainHeight;
+			canvas.style.height = mainRect.height + 'px';
+			canvas.height = mainRect.height;
 
 			const updateFill = () => {
 				const isDark = html.dataset.theme === 'dark';
@@ -75,6 +75,9 @@
 
 			const draw = () => {
 				for (const star of stars) {
+					// dont draw stars that can't be seen
+					if (star.y > mainRect.height) continue;
+
 					drawStar(star);
 				}
 			};
@@ -82,10 +85,11 @@
 			const generateStars = () => {
 				const rect = canvas.getBoundingClientRect();
 				// num stars scales to user screen size
-				const numStars = (mainHeight * window.innerWidth) / 25000;
+				const numStars = (mainRect.height * window.innerWidth) / 25000;
 
 				for (let i = 0; i < numStars; i += 1) {
-					stars[i] = {
+					const star = stars[i];
+					if (!star) stars[i] = {
 						size: randomInt(1, 3),
 						// keep a padding of 16
 						x: randomInt(16, rect.width - 16),
@@ -98,7 +102,7 @@
 			};
 
 			// only gen if the first render
-			if (genStars || stars.length === 0) generateStars();
+			if (!noGenStars) generateStars();
 			updateFill();
 			draw();
 		};
@@ -111,12 +115,13 @@
 
 		window.addEventListener('resize', () => {
 			const canvas = document.getElementById('stars') as HTMLCanvasElement;
-			setupCanvas(canvas, true);
+			setupCanvas(canvas);
 		});
 
 		window.addEventListener('themeChange', () => {
 			const canvas = document.getElementById('stars') as HTMLCanvasElement;
-			setupCanvas(canvas);
+			// dont gen new stars ever
+			setupCanvas(canvas, true);
 		})
 
 		setupCanvas(canvas);
