@@ -31,7 +31,9 @@
 		}
 
 		// will run on every page navigation
-		const setupCanvas = (canvas: HTMLCanvasElement, noGenStars?: boolean) => {
+		const setupCanvas = (canvas: HTMLCanvasElement, genStars?: boolean) => {
+			const MAX_PAGE_HEIGHT = 10000;
+
 			const ctx = canvas.getContext('2d')!;
 			const html = document.querySelector('html')!;
 			const main = document.querySelector('main')!;
@@ -83,18 +85,19 @@
 			};
 
 			const generateStars = () => {
+				stars = [];
 				const rect = canvas.getBoundingClientRect();
 				// num stars scales to user screen size
-				const numStars = (mainRect.height * window.innerWidth) / 25000;
+				// a bit of a hack for now to always generate enough stars for all pages
+				const numStars = (MAX_PAGE_HEIGHT * window.innerWidth) / 25000;
 
 				for (let i = 0; i < numStars; i += 1) {
-					const star = stars[i];
-					if (!star) stars[i] = {
+					stars[i] = {
 						size: randomInt(1, 3),
 						// keep a padding of 16
 						x: randomInt(16, rect.width - 16),
 						// try not to create any behind header
-						y: randomInt(64, rect.height - 16),
+						y: randomInt(64, MAX_PAGE_HEIGHT - 16),
 						rotation: randomInt(0, 90),
 						pointiness: randomInt(1, 2),
 					}
@@ -102,7 +105,7 @@
 			};
 
 			// only gen if the first render
-			if (!noGenStars) generateStars();
+			if (genStars || stars.length === 0) generateStars();
 			updateFill();
 			draw();
 		};
@@ -115,13 +118,12 @@
 
 		window.addEventListener('resize', () => {
 			const canvas = document.getElementById('stars') as HTMLCanvasElement;
-			setupCanvas(canvas);
+			setupCanvas(canvas, true);
 		});
 
 		window.addEventListener('themeChange', () => {
 			const canvas = document.getElementById('stars') as HTMLCanvasElement;
-			// dont gen new stars ever
-			setupCanvas(canvas, true);
+			setupCanvas(canvas);
 		})
 
 		setupCanvas(canvas);
