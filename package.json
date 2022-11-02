@@ -11,24 +11,21 @@
 	},
 	"devDependencies": {
 		"@astrojs/sitemap": "1.0.0",
-		"@typescript-eslint/eslint-plugin": "5.33.0",
-		"@typescript-eslint/parser": "5.33.0",
-		"astro": "1.1.1",
-		"autoprefixer": "10.4.8",
-		"cssnano": "5.1.13",
-		"eslint": "8.22.0",
+		"@typescript-eslint/eslint-plugin": "5.42.0",
+		"@typescript-eslint/parser": "5.42.0",
+		"astro": "1.6.2",
+		"autoprefixer": "10.4.13",
+		"cssnano": "5.1.14",
+		"eslint": "8.26.0",
 		"eslint-config-prettier": "8.5.0",
-		"eslint-plugin-astro": "0.17.1",
+		"eslint-plugin-astro": "0.21.0",
 		"eslint-plugin-jsx-a11y": "6.6.1",
 		"eslint-plugin-prettier": "4.2.1",
-		"postcss-preset-env": "7.7.2",
+		"postcss-preset-env": "7.8.2",
 		"prettier": "2.7.1",
-		"sass": "1.54.4"
+		"sass": "1.55.0"
 	},
 	"dependencies": {
-		"@nanostores/preact": "0.2.1",
-		"flamethrower-router": "0.0.0-meme.9",
-		"nanostores": "0.6.0",
-		"preact": "10.10.2"
+		"flamethrower-router": "0.0.0-meme.9"
 	}
 }
