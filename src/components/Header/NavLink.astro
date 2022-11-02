@@ -8,14 +8,12 @@ const { href, label } = Astro.props as Props;
 const isActive = Astro.url.pathname === href || Astro.url.pathname.slice(undefined, -1) === href;
 ---
 <style lang="scss">
-	@use "../../styles/vars.scss";
-
 	.root {
-		padding: vars.$spacing_md vars.$spacing_xl;
+		padding: var(--spacing-md) var(--spacing-xl);
 		font-weight: 500;
 		color: var(--text-color);
 		text-decoration: none;
-		border-radius: vars.$radius;
+		border-radius: var(--radius);
 
 		&:not(&[data-active]):hover {
 			background-color: rgba(var(--primary-300), 0.5);

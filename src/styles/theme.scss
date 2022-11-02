@@ -1,5 +1,13 @@
 @use './utils';
 
+html {
+	--radius: 8px;
+	--spacing-sm: 4px;
+	--spacing-md: 8px;
+	--spacing-lg: 12px;
+	--spacing-xl: 16px;
+}
+
 html[data-theme='light'] {
 	--bg-color-from: #feffe3;
 	--bg-color-to: #fdfff5;

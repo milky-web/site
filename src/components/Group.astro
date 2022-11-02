@@ -1,0 +1,31 @@
+---
+import { handleStyleProps, resolveUnit, StyleProps } from '@/utils/handleStyleProps';
+
+interface Props extends StyleProps {
+	align?: 'center' | 'flex-start' | 'flex-end';
+	justify?: 'center' | 'flex-start' | 'flex-end';
+	gap?: string | number;
+	style?: Record<string, any>;
+}
+const props = Astro.props as Props;
+const styles = { ...props.style, ...handleStyleProps(props) };
+
+if (props.align) {
+	styles.alignItems = resolveUnit(props.align);
+}
+
+if (props.justify) {
+	styles.justifyContent = resolveUnit(props.justify);
+}
+
+if (props.gap) {
+	styles.gap = resolveUnit(props.gap);
+}
+---
+<style lang="scss">
+	.root {
+		display: flex;
+		flex-flow: row wrap;
+	}
+</style>
+<div style={styles} class="root"><slot /></div>

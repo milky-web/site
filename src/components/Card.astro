@@ -1,0 +1,19 @@
+---
+import { handleStyleProps, StyleProps } from '@/utils/handleStyleProps';
+
+interface Props extends StyleProps {
+	style?: Record<string, any>;
+}
+const props = Astro.props as Props;
+const styles = { ...props.style, ...handleStyleProps(props) };
+---
+<style lang="scss">
+	.root {
+		background-color: rgb(var(--primary-300));
+		border-radius: var(--radius);
+		box-shadow: 0px 0px 96px 0px rgb(var(--primary-400));
+	}
+</style>
+<div style={styles} class="root">
+	<slot />
+</div>

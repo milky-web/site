@@ -1,11 +1,22 @@
 ---
 import Hero from '@/components/Hero.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Card from '@/components/Card.astro';
+import Group from '@/components/Group.astro';
+import { Icon } from 'astro-icon';
 ---
 <style lang="scss">
-
 </style>
 <BaseLayout description='Milky Web brings a galaxy of web infrastructure into your hands.'>
 	<Hero />
+	<Group my={100} justify='center'>
+		<Card py={16} p={8}>
+			<Group align='center' gap={16}>
+				<Icon size={48} pack='tabler' name='bolt' />
+				<h1 style={{ marginTop: 0, marginBottom: 0 }}>Easy to use</h1>
+			</Group>
+			<p style={{ fontSize: '1rem' }}>text about how easy it is to use</p>
+		</Card>
+	</Group>
 	<div style={{ height: '10000px' }}></div>
 </BaseLayout>

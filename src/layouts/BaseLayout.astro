@@ -18,7 +18,10 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 	<head>
 		<meta charset="utf-8">
 		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link
+			rel='icon'
+			href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>🌌</text></svg>'
+		/>
 		<title>{title || 'Milky Web'}</title>
 		<meta name="description" content={description}>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,14 +33,13 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 			// setup mutation observer to fire event whenever theme changes
 		
 			const observer = new MutationObserver((list) => {
-				for (const mutation of list) {
-					if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-						window.dispatchEvent(new CustomEvent('themeChange', {
-							detail: {
-								newTheme: (mutation.target as HTMLHtmlElement).dataset.theme
-							}
-						}));
-					}
+				const mutation = list[0];
+				if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+					window.dispatchEvent(new CustomEvent('themeChange', {
+						detail: {
+							newTheme: (mutation.target as HTMLHtmlElement).dataset.theme
+						}
+					}));
 				}
 			});
 			observer.observe(document.querySelector('html')!, { childList: false, attributes: true, subtree: false });
