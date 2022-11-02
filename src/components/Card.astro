@@ -3,8 +3,10 @@ import { handleStyleProps, StyleProps } from '@/utils/handleStyleProps';
 
 interface Props extends StyleProps {
 	style?: Record<string, any>;
+	component?: keyof HTMLElementTagNameMap;
 }
 const props = Astro.props as Props;
+const Element = props.component || 'div';
 const styles = { ...props.style, ...handleStyleProps(props) };
 ---
 <style lang="scss">
@@ -14,6 +16,6 @@ const styles = { ...props.style, ...handleStyleProps(props) };
 		box-shadow: 0px 0px 96px 0px rgb(var(--primary-400));
 	}
 </style>
-<div style={styles} class="root">
+<Element style={styles} class="root">
 	<slot />
-</div>
+</Element>

@@ -6,8 +6,10 @@ interface Props extends StyleProps {
 	justify?: 'center' | 'flex-start' | 'flex-end';
 	gap?: string | number;
 	style?: Record<string, any>;
+	component?: keyof HTMLElementTagNameMap;
 }
 const props = Astro.props as Props;
+const Element = props.component || 'div';
 const styles = { ...props.style, ...handleStyleProps(props) };
 
 if (props.align) {
@@ -28,4 +30,4 @@ if (props.gap) {
 		flex-flow: row wrap;
 	}
 </style>
-<div style={styles} class="root"><slot /></div>
+<Element style={styles} class="root"><slot /></Element>
