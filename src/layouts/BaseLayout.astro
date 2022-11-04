@@ -31,7 +31,6 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 		</script>
 		<script>
 			// setup mutation observer to fire event whenever theme changes
-		
 			const observer = new MutationObserver((list) => {
 				const mutation = list[0];
 				if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
@@ -44,10 +43,10 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 			});
 			observer.observe(document.querySelector('html')!, { childList: false, attributes: true, subtree: false });
 		</script>
-		<script>
-			import flamethrower from 'flamethrower-router';
-			window.router = flamethrower({ pageTransitions: false, log: import.meta.env.DEV, prefetch: 'visible' });
-		</script>
+		<!-- <script>
+			//import flamethrower from 'flamethrower-router';
+			//window.router = flamethrower({ pageTransitions: false, log: import.meta.env.DEV, prefetch: 'visible' });
+		</script> -->
 		<style lang="scss">
 			.main {
 				flex-grow: 1;

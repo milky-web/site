@@ -4,19 +4,29 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Card from '@/components/Card.astro';
 import Group from '@/components/Group.astro';
 import { Icon } from 'astro-icon';
+import Planet from '@/components/Planet.astro';
 ---
 <style lang="scss">
 </style>
 <BaseLayout description='Milky Web brings a galaxy of web infrastructure into your hands.'>
 	<Hero />
-	<Group my={100} justify='center'>
-		<Card py={16} p={8}>
+	<Group my={100} justify='center' gap={128}>
+		<Card p={24}>
 			<Group align='center' gap={16}>
-				<Icon size={48} pack='tabler' name='bolt' />
+				<Icon size={40} pack='tabler' name='bolt' />
 				<h1 style={{ marginTop: 0, marginBottom: 0 }}>Easy to use</h1>
 			</Group>
-			<p style={{ fontSize: '1rem' }}>text about how easy it is to use</p>
+			<p style={{ marginBottom: 0 }}>text about how easy it is to use</p>
+		</Card>
+		<Card p={24}>
+			<Group align='center' gap={16}>
+				<Icon size={40} pack='tabler' name='bolt' />
+				<h1 style={{ marginTop: 0, marginBottom: 0 }}>Easy to use</h1>
+			</Group>
+			<p style={{ marginBottom: 0 }}>text about how easy it is to use</p>
 		</Card>
 	</Group>
+	<Planet diameter={300} top={100} left={'35%'} />
+	<Planet diameter={400} gradient="linear-gradient(160deg, rgba(131,58,180,1) 16%, rgba(253,29,29,1) 69%, rgba(252,176,69,1) 100%)" top={'90%'} left={'40%'} />
 	<div style={{ height: '10000px' }}></div>
 </BaseLayout>

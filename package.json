@@ -28,6 +28,6 @@
 	},
 	"dependencies": {
 		"astro-icon": "^0.8.0",
-		"flamethrower-router": "0.0.0-meme.9"
+		"flamethrower-router": "0.0.0-meme.12"
 	}
 }
