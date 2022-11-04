@@ -13,19 +13,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 7.12.2
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-          cache: "pnpm"
+          cache: "npm"
 
       - name: Build
         run: |
-          pnpm i --frozen-lockfile
-          pnpm build
+          npm i
+          npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
