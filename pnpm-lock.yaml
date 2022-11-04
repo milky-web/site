@@ -14,14 +14,12 @@ specifiers:
   eslint-plugin-astro: 0.21.0
   eslint-plugin-jsx-a11y: 6.6.1
   eslint-plugin-prettier: 4.2.1
-  flamethrower-router: 0.0.0-meme.12
   postcss-preset-env: 7.8.2
   prettier: 2.7.1
   sass: 1.55.0
 
 dependencies:
   astro-icon: 0.8.0
-  flamethrower-router: 0.0.0-meme.12
 
 devDependencies:
   '@astrojs/sitemap': 1.0.0
@@ -2692,10 +2690,6 @@ packages:
       micromatch: 4.0.5
       pkg-dir: 4.2.0
     dev: true
-
-  /flamethrower-router/0.0.0-meme.12:
-    resolution: {integrity: sha512-PWcNrjzItwk61RTk/SbbKJNcAgl6qCXH8xkZjGjUGV/dgKAnURci+k+Yk8emubUQWTdAd1kSqujy0VRjoeEgxg==}
-    dev: false
 
   /flat-cache/3.0.4:
     resolution: {integrity: sha512-dm9s5Pw7Jc0GvMYbshN6zchCA9RgQlzzEZX3vylR9IqFfS8XciblUXOKfW6SiuJ0e13eDYZoZV5wdrev7P3Nwg==}
