@@ -5,28 +5,73 @@ import Card from '@/components/Card.astro';
 import Group from '@/components/Group.astro';
 import { Icon } from 'astro-icon';
 import Planet from '@/components/Planet.astro';
+import Stack from '@/components/Stack.astro';
+import GradientText from '@/components/GradientText.astro';
+import SimpleGrid from '@/components/SimpleGrid.astro';
+import Box from '@/components/Box.astro';
 ---
-<style lang="scss">
-</style>
+
+<style lang='scss'></style>
 <BaseLayout description='Milky Web brings a galaxy of web infrastructure into your hands.'>
 	<Hero />
-	<Group my={100} justify='center' gap={128}>
-		<Card p={24}>
-			<Group align='center' gap={16}>
-				<Icon size={40} pack='tabler' name='bolt' />
-				<h1 style={{ marginTop: 0, marginBottom: 0 }}>Easy to use</h1>
-			</Group>
-			<p style={{ marginBottom: 0 }}>text about how easy it is to use</p>
-		</Card>
-		<Card p={24}>
-			<Group align='center' gap={16}>
-				<Icon size={40} pack='tabler' name='bolt' />
-				<h1 style={{ marginTop: 0, marginBottom: 0 }}>Easy to use</h1>
-			</Group>
-			<p style={{ marginBottom: 0 }}>text about how easy it is to use</p>
-		</Card>
+	<Group justify='center' align='center' gap={16}>
+		<Stack mxw={315}>
+			<Box component='h1' fz={48} mt={0}>
+				Take your operations to the <GradientText>stars</GradientText>
+			</Box>
+			<Box component='p' fz={20} m={0}>
+				Milky web was built from the ground up for the businesses of today. We are focused
+				on getting your business moving as fast and efficiently as possible.
+			</Box>
+		</Stack>
+		<SimpleGrid cols={2} gap={16}>
+			<Card mxw={300} p={24} shade={400}>
+				<Group align='center' gap={16}>
+					<Icon size={40} pack='tabler' name='bolt' />
+					<h1 style={{ marginTop: 0, marginBottom: 0 }}>Easy to use</h1>
+				</Group>
+				<p style={{ marginBottom: 0 }}>
+					Milky Web is simple, our applications are designed with modern technology and
+					accesibility in mind.
+				</p>
+			</Card>
+			<Card mxw={300} p={24}>
+				<Group align='center' gap={16}>
+					<Icon size={40} pack='tabler' name='shield-lock' />
+					<h1 style={{ marginTop: 0, marginBottom: 0 }}>Secure</h1>
+				</Group>
+				<p style={{ marginBottom: 0 }}>
+					Deployments are completely isolated, and designed with security in mind.
+				</p>
+			</Card>
+			<Card mxw={300} p={24}>
+				<Group align='center' gap={16}>
+					<Icon size={40} pack='tabler' name='arrows-shuffle' />
+					<h1 style={{ marginTop: 0, marginBottom: 0 }}>Flexible</h1>
+				</Group>
+				<p style={{ marginBottom: 0 }}>
+					Our pricing model means that you only pay for what you need. You will never have
+					to pay for anything that you don't need.
+				</p>
+			</Card>
+			<Card mxw={300} p={24} shade={400}>
+				<Group align='center' gap={16}>
+					<Icon size={40} pack='tabler' name='key' />
+					<h1 style={{ marginTop: 0, marginBottom: 0 }}>Owned</h1>
+				</Group>
+				<p style={{ marginBottom: 0 }}>
+					All data you collect through our applications belong to you. You can export or
+					delete it whenevr you see fit.
+				</p>
+			</Card>
+		</SimpleGrid>
 	</Group>
-	<Planet diameter={300} top={100} left={'35%'} />
-	<Planet diameter={400} gradient="linear-gradient(160deg, rgba(131,58,180,1) 16%, rgba(253,29,29,1) 69%, rgba(252,176,69,1) 100%)" top={'90%'} left={'40%'} />
+	<Planet diameter={300} top={100} left='35%' />
+	<Planet
+		diameter={400}
+		gradient='linear-gradient(160deg, rgba(131,58,180,1) 16%, rgba(253,29,29,1) 69%, rgba(252,176,69,1) 100%)'
+		top='90%'
+		left='40%'
+	/>
 	<div style={{ height: '10000px' }}></div>
 </BaseLayout>

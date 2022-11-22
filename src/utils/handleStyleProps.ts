@@ -1,4 +1,6 @@
 export type StyleProps = {
+	class?: string;
+	style?: Record<string, any>;
 	p?: string | number;
 	pt?: string | number;
 	pb?: string | number;
@@ -13,6 +15,11 @@ export type StyleProps = {
 	mr?: string | number;
 	mx?: string | number;
 	my?: string | number;
+	mxw?: string | number;
+	mnw?: string | number;
+	mxh?: string | number;
+	mnh?: string | number;
+	fz?: string | number;
 };
 
 export const resolveUnit = (measurement: string | number) =>
@@ -69,6 +76,25 @@ export const handleStyleProps = (props: StyleProps) => {
 	if (props.my !== undefined) {
 		styles.marginTop = resolveUnit(props.my);
 		styles.marginBottom = resolveUnit(props.my);
+	}
+
+	// handle fontsize
+	if (props.fz !== undefined) {
+		styles.fontSize = resolveUnit(props.fz);
+	}
+
+	// handle min/max width/height
+	if (props.mxw !== undefined) {
+		styles.maxWidth = resolveUnit(props.mxw);
+	}
+	if (props.mnw !== undefined) {
+		styles.maxWidth = resolveUnit(props.mnw);
+	}
+	if (props.mxh !== undefined) {
+		styles.maxWidth = resolveUnit(props.mxh);
+	}
+	if (props.mnh !== undefined) {
+		styles.maxWidth = resolveUnit(props.mnh);
 	}
 
 	return styles;
