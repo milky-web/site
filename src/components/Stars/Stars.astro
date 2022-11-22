@@ -36,7 +36,7 @@
 
 			const ctx = canvas.getContext('2d')!;
 			const html = document.querySelector('html')!;
-			const main = document.querySelector('main')!;
+			const main = document.querySelector('body')!;
 			const htmlStyle = getComputedStyle(html);
 
 			// Set the "actual" size of the canvas, prevents blurriness on large screens
@@ -89,7 +89,7 @@
 				const rect = canvas.getBoundingClientRect();
 				// num stars scales to user screen size
 				// a bit of a hack for now to always generate enough stars for all pages
-				const numStars = (MAX_PAGE_HEIGHT * window.innerWidth) / 25000;
+				const numStars = (window.innerHeight * (window.innerWidth + 300)) / 27000;
 
 				for (let i = 0; i < numStars; i += 1) {
 					stars[i] = {
@@ -97,7 +97,7 @@
 						// keep a padding of 16
 						x: randomInt(16, rect.width - 16),
 						// try not to create any behind header
-						y: randomInt(64, MAX_PAGE_HEIGHT - 16),
+						y: randomInt(64, rect.height),
 						rotation: randomInt(0, 90),
 						pointiness: randomInt(1, 2),
 					}

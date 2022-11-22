@@ -14,40 +14,58 @@ export interface Props {
 
 const { title, description, noHeader, noFooter } = Astro.props as Props;
 ---
-<html data-theme="dark" lang="en">
+
+<html data-theme='dark' lang='en'>
 	<head>
-		<meta charset="utf-8">
-		<meta name="generator" content={Astro.generator} />
+		<meta charset='utf-8' />
+		<meta name='generator' content={Astro.generator} />
 		<link
 			rel='icon'
 			href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 256 256%22><text y=%22203%22 font-size=%22224%22>🌌</text></svg>'
 		/>
 		<title>{title || 'Milky Web'}</title>
-		<meta name="description" content={description}>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name='description' content={description} />
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
 		<script is:inline>
 			// this exists to stop theme from flashing by setting it before css is evaluated
-			(function(){var t;var s=localStorage.getItem('theme');if(s)t=s;else t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.querySelector('html').dataset.theme=t;})()
+			;(function () {
+				var theme;
+				var storedTheme = localStorage.getItem('theme');
+
+				if (storedTheme) {
+					theme = storedTheme;
+				} else {
+					theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+				}
+
+				document.querySelector('html').dataset.theme = theme;
+			})();
 		</script>
 		<script>
 			// setup mutation observer to fire event whenever theme changes
 			const observer = new MutationObserver((list) => {
 				const mutation = list[0];
 				if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-					window.dispatchEvent(new CustomEvent('themeChange', {
-						detail: {
-							newTheme: (mutation.target as HTMLHtmlElement).dataset.theme
-						}
-					}));
+					window.dispatchEvent(
+						new CustomEvent('themeChange', {
+							detail: {
+								newTheme: (mutation.target as HTMLHtmlElement).dataset.theme,
+							},
+						}),
+					);
 				}
 			});
-			observer.observe(document.querySelector('html')!, { childList: false, attributes: true, subtree: false });
+			observer.observe(document.querySelector('html')!, {
+				childList: false,
+				attributes: true,
+				subtree: false,
+			});
 		</script>
 		<!-- <script>
 			//import flamethrower from 'flamethrower-router';
 			//window.router = flamethrower({ pageTransitions: false, log: import.meta.env.DEV, prefetch: 'visible' });
 		</script> -->
-		<style lang="scss">
+		<style lang='scss'>
 			.main {
 				flex-grow: 1;
 				padding: 0.5rem;
@@ -58,7 +76,7 @@ const { title, description, noHeader, noFooter } = Astro.props as Props;
 	<body>
 		<Stars />
 		{!noHeader && <Header />}
-		<main class="main">
+		<main class='main'>
 			<slot />
 		</main>
 		{!noFooter && <Footer />}
